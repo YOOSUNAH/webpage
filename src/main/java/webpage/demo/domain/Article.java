@@ -8,19 +8,19 @@ public class Article {
     private Long id;
     private String category;
     private String title;
-    private String context;
-    private String writer;
+    private String content;
+    private String writerName;
 
 
     public Article(){
 
     }
 
-    public Article(Long id, String category, String title, String context, String writer) {
+    public Article(Long id, String category, String title, String content, String writerName) {
         this.id = id;
         this.category = category;
         this.title = title;
-        this.context = context;
-        this.writer = writer;
+        this.content = content;
+        this.writerName = writerName;
     }
 }

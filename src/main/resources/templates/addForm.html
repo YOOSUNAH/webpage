@@ -1,29 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성하기</title>
 </head>
 <body>
-<!--<ul>-->
-<!--    <li>-->
-<!--    <li><a href="/post/category"> 게시물 카테고리 </a>-->
-<!--    <li><a href="/post/title"> 게시물 제목 </a>-->
-<!--    <li><a href="/post/context"> 게시물 내용 </a>-->
-<!--    <li><a href="/post/writer"> 게시물 작성자 </a>-->
-<!--    </li>-->
-<!--</ul>-->
 <div>
     <form method="post" action="/posts" id="postForm">
+        <div>게시물 작성하기</div>
         <div>
             <label>
                 카테고리를 선택하세요:
                 <select name="category" form="postForm">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
                 </select>
+
             </label>
         </div>
         <div>
@@ -31,6 +25,7 @@
                 제목:
                 <input name="title" type="text">
             </label>
+
         </div>
         <div>
             <label>
@@ -45,8 +40,13 @@
             </label>
         </div>
         <div>
-            <button type="submit">저장</button>
+            <button
+                    th:onclick="|location.href='@{/posts}'|"
+                    type="submit">저장</button>
         </div>
+        <div>
+            <li><a href="/posts/list"> 게시물 목록 </a>    </div>
+</div>
     </form>
 </div>
 </body>

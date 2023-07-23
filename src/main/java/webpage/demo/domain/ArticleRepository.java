@@ -19,7 +19,7 @@ public class ArticleRepository {
         return article;
     }
 
-    public Article findById(Long id){
+    public static Article findById(Long id){
         return store.get(id);
     }
     public List<Article> findAll(){

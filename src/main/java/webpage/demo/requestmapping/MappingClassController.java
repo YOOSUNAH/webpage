@@ -1,13 +1,12 @@
 package webpage.demo.requestmapping;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.slf4j.Slf4j;
+import webpage.demo.domain.Article;
+import webpage.demo.domain.ArticleRepository;
 
 @Slf4j
 // @RestController
@@ -21,36 +20,39 @@ public class MappingClassController {
     // PATCH - 부분적으로 수정한다 ... 데이터를 넣는 것 -> 일부 데이터만 주는 것
     // DELETE - 삭제s
 
-	@GetMapping("/write")
-	public String write() {
-		// return "get write";
-		log.info("작성 페이지 포워딩 컨트롤러 탔다 러브!");
-		return "addForm";
-	}
-
-	@GetMapping("")
-	public String post() {
-		return "post posts";
-	}
-
-    @PostMapping("")
-    public String save(
-		@RequestParam String category,
-        @RequestParam String title,
-        @RequestParam String content,
-        @RequestParam String writerName
-    ) {
-		// log.info("카테고리 : {}", category);
-		// log.info("제목 : {}", title);
-		// log.info("내용 : {}", content);
-		// log.info("작성자 : {}", writerName);
-
-        return "love";
+    @GetMapping("/write")
+    public String write() {
+        return "addForm";
     }
+    @PostMapping("/write")
+    public <model> String save(
+            @RequestParam String category,
+            @RequestParam String title,
+            @RequestParam String content,
+            @RequestParam String writerName
+    ) {
+        Article article = new Article();
+        article.setCategory(category);
+        article.setTitle(title);
+        article.setContent(content);
+        article.setWriterName(writerName);
 
-    // @GetMapping("/{postId}")
-    // public String findPost(@PathVariable String postId){
-    //     return "get postId= " + postId;
-	// }
+        ArticleRepository.save(article);
+        return "addForm";
+    }
+    @GetMapping("/list")
+    public String post() {
+        return "listForm";
+    }
+//    @PostMapping("/list")
+//    public
 
+    @GetMapping("/{postId}")
+    public String findPost(@PathVariable long postId) {
+        Long articleId = null;
+        Article article = ArticleRepository.findById(articleId);
+        return "post posts";
+    }
 }
+
+
