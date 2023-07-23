@@ -1,0 +1,27 @@
+package webpage.demo.domain;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ArticleRepositoryTest {
+    ArticleRepository articleRepository = new ArticleRepository();
+
+    @AfterEach
+    void afterEach(){
+        articleRepository.clearStore();
+    }
+
+    @Test
+    void save(){
+        //given
+        Article article = new Article(1L, "category1", "title1", "context1", "writer1");
+        //when
+        Article savedArticle = ArticleRepository.save(article);
+        //then
+        Article findArticle = articleRepository.findById(article.getId());
+        Assertions.assertThat(findArticle).isEqualTo(savedArticle);
+    }
+}

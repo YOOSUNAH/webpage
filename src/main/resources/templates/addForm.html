@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 작성하기</title>
+</head>
+<body>
+<!--<ul>-->
+<!--    <li>-->
+<!--    <li><a href="/post/category"> 게시물 카테고리 </a>-->
+<!--    <li><a href="/post/title"> 게시물 제목 </a>-->
+<!--    <li><a href="/post/context"> 게시물 내용 </a>-->
+<!--    <li><a href="/post/writer"> 게시물 작성자 </a>-->
+<!--    </li>-->
+<!--</ul>-->
+<div>
+    <form method="post" action="/posts" id="postForm">
+        <div>
+            <label>
+                카테고리를 선택하세요:
+                <select name="category" form="postForm">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>
+                제목:
+                <input name="title" type="text">
+            </label>
+        </div>
+        <div>
+            <label>
+                내용:
+                <input name="content" type="text">
+            </label>
+        </div>
+        <div>
+            <label>
+                작성자:
+                <input name="writerName" type="text">
+            </label>
+        </div>
+        <div>
+            <button type="submit">저장</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
