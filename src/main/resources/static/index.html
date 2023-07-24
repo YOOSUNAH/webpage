@@ -11,7 +11,10 @@
 
 
     <li><a href="/posts/write"> 게시물 작성 </a>
-    <li><a href="/posts/list"> 게시물 목록 </a>
+    <li><a href="/posts/list"
+           onclick="location.href='article.html'"
+           th:inclick="|location.href='@{/basic/article}'|"> 게시물 목록 </a>
+
     <li><a href="/posts/{postId}"> 특정 게시물 조회 </a>
 
     </li>
