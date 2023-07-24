@@ -44,8 +44,10 @@ public class MappingClassController {
     public String post() {
         return "listForm";
     }
-//    @PostMapping("/list")
-//    public
+    @PostMapping("/list")
+    public String saveList(){
+        return "";
+    }
 
     @GetMapping("/{postId}")
     public String findPost(@PathVariable long postId) {
