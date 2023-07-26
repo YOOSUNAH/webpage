@@ -27,6 +27,19 @@ public class BasicArticleController {
     }
     @PostConstruct
     public void init(){
-        articleRepository.save(new Article(1L,"A", "제목A", "내용B", "sun" ));
+        final List<Article> articles = List.of(
+                new Article(1L, "A", "제목 A", "내용 A", "sun"),
+                new Article(2L, "B", "제목 B", "내용 B", "sun"),
+                new Article(3L, "C", "제목 C", "내용 C", "sun"),
+                new Article(4L, "A", "제목 A", "내용 A", "sun"),
+                new Article(5L, "B", "제목 B", "내용 B", "sun"),
+                new Article(6L, "C", "제목 C", "내용 C", "sun"),
+                new Article(7L, "A", "제목 A", "내용 A", "sun"),
+                new Article(8L, "B", "제목 B", "내용 B", "sun"),
+                new Article(9L, "C", "제목 C", "내용 C", "sun"),
+                new Article(10L, "A", "제목A", "내용 A", "sun")
+        );
+
+        articleRepository.saveAll(articles);
     }
 }

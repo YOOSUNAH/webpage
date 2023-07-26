@@ -15,23 +15,23 @@ import java.util.List;
 @Controller
 @RequestMapping("/posts")
 public class MappingClassController {
+    private final ArticleRepository articleRepository;
 
     public MappingClassController(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
-    //
-    private final ArticleRepository articleRepository;
-
     @GetMapping
     public String article(Model model) {
-        List<Article> article = ArticleRepository.findAll();
+        List<Article> article = articleRepository.findAll();
         model.addAttribute("Article", article);
         return "post/list";
     }
 
    @GetMapping("/list")
-    public String articleForm() {
+    public String articleForm(Model model) {
+        List<Article> articles = articleRepository.findAll();
+        model.addAttribute("articles", articles);
         return "listForm";
     }
 
@@ -46,7 +46,6 @@ public class MappingClassController {
         return "addForm";
     }
 
-    //@PostMapping("/write")
     public <model> String addArticleV1(
             @RequestParam String category,
             @RequestParam String title,
@@ -61,10 +60,7 @@ public class MappingClassController {
 
         ArticleRepository.save(article);
         return "/list";
-        //return "addForm";
     }
-
-
 }
 
 
