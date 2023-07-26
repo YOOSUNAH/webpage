@@ -9,10 +9,18 @@
 <body>
 <div class="container" style="max-width:600px"></div>
 </div>
-<div class="row">
-    <div class="col">
-        <li><a href="/posts/list"> 게시물 목록 </a>    </div>
-</div>
+<!--<div class="row">-->
+<!--    <div class="col">-->
+<!--        <li><a href="/posts/list"> 게시물 목록 </a>    </div>-->
+<!--</div>-->
+
+
+<div class="col">
+    <button class="w-100 btn btn-secondary btn-lg"
+            onclick="location.href='items.html'"
+            th:inclick="|location.href='@{/posts/article}'|"
+            type="button">목록으로
+    </button>
 
 <hr class="my-4">
 <div>
@@ -26,8 +34,9 @@
             <th>작성자</th>
         </tr>
         </thead>
-        <tbody></tbody>
-            <td><a href="article.html" th:href="@{/basic/article/{articleId}(articleId=${article.id})}" th:text="${article.id}" >1</a></td>
+        <tbody>
+        <tr>
+          //  <td><a href="article.html" th:href="@{/basic/article/{articleId}(articleId=${article.id})}" th:text="${article.id}" >1</a></td>
             <td th:text="${article.category}"> A</td>
             <td th:text="${article.title}">제목B</td>
             <td th:text="${article.content}">내용C</td>

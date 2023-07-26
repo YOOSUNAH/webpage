@@ -22,7 +22,7 @@ public class ArticleRepository {
     public static Article findById(Long id){
         return store.get(id);
     }
-    public List<Article> findAll(){
+    public static List<Article> findAll(){
         return new ArrayList<>(store.values());
     }
     public void update(Long articleId, Article updateParam){

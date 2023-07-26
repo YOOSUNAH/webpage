@@ -8,11 +8,32 @@ import lombok.extern.slf4j.Slf4j;
 import webpage.demo.domain.Article;
 import webpage.demo.domain.ArticleRepository;
 
+import java.util.List;
+
 @Slf4j
 // @RestController
 @Controller
 @RequestMapping("/posts")
 public class MappingClassController {
+
+    public MappingClassController(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
+
+    //
+    private final ArticleRepository articleRepository;
+
+    @GetMapping
+    public String article(Model model) {
+        List<Article> article = ArticleRepository.findAll();
+        model.addAttribute("Article", article);
+        return "post/list";
+    }
+
+   @GetMapping("/list")
+    public String articleForm() {
+        return "listForm";
+    }
 
     // GET - 가져오다 ... 페이지 요청, 데이터 조회
     // POST - 보낸다 ... 자원 생성, 데이터를 입력한다
@@ -24,8 +45,9 @@ public class MappingClassController {
     public String write() {
         return "addForm";
     }
-    @PostMapping("/write")
-    public <model> String save(
+
+    //@PostMapping("/write")
+    public <model> String addArticleV1(
             @RequestParam String category,
             @RequestParam String title,
             @RequestParam String content,
@@ -38,23 +60,12 @@ public class MappingClassController {
         article.setWriterName(writerName);
 
         ArticleRepository.save(article);
-        return "addForm";
-    }
-    @GetMapping("/list")
-    public String post() {
-        return "listForm";
-    }
-    @PostMapping("/list")
-    public String saveList(){
-        return "";
+        return "/list";
+        //return "addForm";
     }
 
-    @GetMapping("/{postId}")
-    public String findPost(@PathVariable long postId) {
-        Long articleId = null;
-        Article article = ArticleRepository.findById(articleId);
-        return "post posts";
-    }
+
 }
+
 
 
