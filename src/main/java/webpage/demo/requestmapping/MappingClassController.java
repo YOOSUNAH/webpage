@@ -39,7 +39,7 @@ public class MappingClassController {
         return "listForm";
     }
 
-
+// ---------------------------------------------------------------//
     @GetMapping("/write")
     public String write() {
         return "addForm";
