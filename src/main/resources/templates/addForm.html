@@ -5,7 +5,7 @@
 </head>
 <body>
 <div>
-    <form method="post" action="/posts" id="postForm">
+    <form method="post" action="/posts" th:action id="postForm">
         <div>게시물 작성하기</div>
         <div>
             <label>
@@ -30,7 +30,7 @@
             <label>
                 내용:
                 <input name="content" type="text">
-            </label>홈
+            </label>
         </div>
         <div>
             <label>
@@ -41,12 +41,16 @@
         <div>
             <button
                     th:onclick="|location.href='@{/posts/list}'|"
-                    type="submit">저장</button>
+                    type="submit">저장 </button>
         </div>
-        <div>
-            <li><a href="/posts/list"> 게시물 목록 </a>    </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/  posts/list}'"
+                    type="button">게시물 목록으로</button>
+
 </div>
-    </form>
+</form>
 </div>
 </body>
 </html>
