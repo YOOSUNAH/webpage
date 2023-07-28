@@ -21,11 +21,15 @@ public class MappingClassController {
         this.repo = repo;
     }
 
-    @GetMapping
+    @GetMapping("/items")
+    public String items() {
+        return "items";
+    }
+    @GetMapping ()
     public String article(Model model) {
         List<Article> article = repo.findAll();
         model.addAttribute("Article", article);
-        return "post/list";
+        return "items";
     }
 
    @GetMapping("/list")
@@ -35,19 +39,30 @@ public class MappingClassController {
         return "listForm";
     }
 
-    // GET - 가져오다 ... 페이지 요청, 데이터 조회
-    // POST - 보낸다 ... 자원 생성, 데이터를 입력한다
-    // PUT - 넣는다 ... 데이터를 넣는것 -> 전체 모든 데이터를 주는 것
-    // PATCH - 부분적으로 수정한다 ... 데이터를 넣는 것 -> 일부 데이터만 주는 것
-    // DELETE - 삭제s
 
     @GetMapping("/write")
     public String write() {
         return "addForm";
     }
     @PostMapping("/write")
-    public String save() {
-        return "addForm";
+    public String save(
+            @RequestParam String category,
+            @RequestParam String title,
+            @RequestParam String content,
+            @RequestParam String  writerName,
+            Model model) {
+
+        Article article = new Article();
+        article.setCategory(category);
+        article.setTitle(title);
+        article.setContent(content);
+        article.setWriterName(writerName);
+
+        ArticleRepository.save(article);
+
+        model.addAttribute("article", article);
+
+        return "items";
     }
 
 
@@ -65,9 +80,14 @@ public class MappingClassController {
         article.setWriterName(writerName);
 
         ArticleRepository.save(article);
-        return "/list";
+        return "/items";
     }
 }
 
 
+// GET - 가져오다 ... 페이지 요청, 데이터 조회
+// POST - 보낸다 ... 자원 생성, 데이터를 입력한다
+// PUT - 넣는다 ... 데이터를 넣는것 -> 전체 모든 데이터를 주는 것
+// PATCH - 부분적으로 수정한다 ... 데이터를 넣는 것 -> 일부 데이터만 주는 것
+// DELETE - 삭제s
 

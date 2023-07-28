@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"><head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8">
     <title>게시글 작성하기</title>
 </head>
@@ -40,13 +41,13 @@
         </div>
         <div>
             <button
-                    th:onclick="|location.href='@{/posts/list}'|"
+                    th:onclick="|location.href='@{/posts/items}'|"
                     type="submit">저장 </button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='items.html'"
-                    th:onclick="|location.href='@{/  posts/list}'"
+                    th:onclick="|location.href='@{/posts/items}'"
                     type="button">게시물 목록으로</button>
 
 </div>
