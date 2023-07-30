@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>로그인</title>
 </head>
+<script>
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    if(params.isValid == 'false'){
+        alert("로그인 정보를 확인해주세요!")
+    }
+</script>
 <body>
 <div>
     <form method="post" action="/users/login" id="postForm">
@@ -26,10 +33,9 @@
         </div>
 
 
-        <div class="col">
+        <div>
             <button class="w-100 btn btn-secondary btn-lg"
-                    th:onclick="location.href='/'"
-                    type="button">로그인
+                    type="submit">로그인
             </button>
         </div>
 

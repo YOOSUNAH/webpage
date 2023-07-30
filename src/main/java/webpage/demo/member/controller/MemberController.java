@@ -1,45 +1,50 @@
 package webpage.demo.member.controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import webpage.demo.article.domain.Article;
-import webpage.demo.article.domain.ArticleRepository;
+import webpage.demo.member.domain.Member;
+import webpage.demo.member.domain.MemberRepository;
 
-import java.lang.reflect.Member;
-
+@Slf4j
 @Controller
 @RequestMapping("/users")
 public class MemberController {
 
-    @GetMapping("/login")
-    public String LoginPage() {
-        return "login";
+    private final MemberRepository memberRepository;
+
+    public MemberController(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
+    @GetMapping("/login")
+    public String loginPage(Model model) {
+//        model.addAttribute("loginUser", getCurrentUser());
+        return "login";
+    }
 
     @PostMapping("/login")
     public String login(
             HttpSession session,
             @RequestParam String username,
-            @RequestParam String password,
-            Model model
+            @RequestParam String password
     ) {
-        String validUsername = "secureUsername";
-        String validPassword = "securePassword";
 
-        if (username.equals(validUsername) && password.equals(validPassword)) {
-            session.setAttribute("loggedInUser", username);
-            return "login";
-        } else {
-            model.addAttribute("isValid", false);
-            return "index";
+        Member member = memberRepository.findByUsername(username);
+        if (member == null) {
+            return "redirect:/users/login" + "?isValid=false";
+        }
+        if (!member.getPassword().equals(password)) {
+            return "redirect:/users/login" + "?isValid=false";
         }
 
+        session.setAttribute("member", member);
+        return "redirect:/";
     }
 
 
@@ -70,8 +75,11 @@ public class MemberController {
             return "signup";
         }
 
-        if (username.length() < 5 || !isAlphaNumeric(username) ||
-                nickname.length() < 5 || !isAlphaNumeric(nickname)) {
+        if (username.length() < 5
+                || !isAlphaNumeric(username)
+                || nickname.length() < 5
+                || !isAlphaNumeric(nickname)
+        ) {
             model.addAttribute("result", false);
             model.addAttribute("reason", "ID는 영문 숫자 혼합하여 5글자 이상이어햐 합니다.");
             return "signup";
@@ -89,20 +97,33 @@ public class MemberController {
             return "signup";
         }
 
-     return "login";
-
-    }
-        // Helper method to check if a string contains only alphanumeric characters
-        private boolean isAlphaNumeric (String input){
-            return input.matches("^[a-zA-Z0-9]+$");
+        Member member = memberRepository.findByUsername(username);
+        if (member != null) {
+            model.addAttribute("result", false);
+            model.addAttribute("reason", "이미 존재하는 ID입니다.");
+            return "signup";
         }
 
-        // Helper method to check if a string contains at least one letter and one digit
-        private boolean hasLetterAndDigit (String input){
-            return input.matches(".*[a-zA-Z].*") && input.matches(".*\\d.*");
-        }
+        Member newMember = new Member(
+                username,
+                nickname,
+                password
+        );
+
+        memberRepository.save(newMember);
+        log.info("회원가입 성공!");
+        return "login";
 
     }
 
+    // Helper method to check if a string contains only alphanumeric characters
+    private boolean isAlphaNumeric(String input) {
+        return input.matches("^[a-zA-Z0-9]+$");
+    }
 
-//        return "/users/login?isValid=false";
+    // Helper method to check if a string contains at least one letter and one digit
+    private boolean hasLetterAndDigit(String input) {
+        return input.matches(".*[a-zA-Z].*") && input.matches(".*\\d.*");
+    }
+
+}

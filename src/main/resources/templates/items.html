@@ -5,13 +5,7 @@
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<div class="col">
-    <button class="w-100 btn btn-secondary btn-lg"
-            th:onclick="location.href='/users/login'"
-            type="button">로그인 하기
-    </button>
-</div>
+
 <script>
     function goDetailPage(articleId) {
         var loginUser = '[[${session.loginUser}]]'
@@ -25,6 +19,26 @@
         }
     }
 </script>
+<body>
+<div class="col">
+    <button th:if="${session.member == null}" class="w-100 btn btn-secondary btn-lg"
+            th:onclick="location.href='/users/login'"
+            type="button">
+        로그인
+    </button>
+
+    <button th:if="${session.member != null}" class="w-100 btn btn-secondary btn-lg"
+            th:onclick="location.href='/users/logout'"
+            type="button">
+        로그아웃
+    </button>
+</div>
+<!--<div class="col" th:if="${loginUser}">-->
+<!--    <button class="w-100 btn btn-secondary btn-lg"-->
+<!--            th:onclick="location.href='/posts/items/' + ${loginUser}"-->
+<!--            type="button">내 상세페이지 보기-->
+<!--    </button>-->
+
 
 
 <div class="container" style="max-width: 600px">

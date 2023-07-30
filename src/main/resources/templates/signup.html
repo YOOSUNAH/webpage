@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
 </head>
+<script>
+    var result = '[[${result}]]'
+    var reason = '[[${reason}]]'
+    if(result != '' && result == 'false'){
+        alert(reason)
+    }
+</script>
 <body>
 <div>
-    <form method="post" action="/users/login" id="postForm">
+    <form method="post" action="/users/signup" id="postForm">
         <div>회원 가입 하기</div>
         <div>
 
@@ -20,26 +27,25 @@
         <div>
             <label>
                 Nickname:
-                <input name="Nickname" type="text">
+                <input name="nickname" type="text">
             </label>
         </div>
         <div>
             <label>
-               PW:
-                <input name="PW" type="text">
+                PW:
+                <input name="password" type="text">
             </label>
         </div>
         <div>
             <label>
                 PW Check:
-                <input name="PWCheck" type="text">
+                <input name="passwordCheck" type="text">
             </label>
         </div>
 
-        <div class="col">
+        <div>
             <button class="w-100 btn btn-secondary btn-lg"
-                    th:onclick="location.href='/'"
-                    type="button">회원가입
+                    type="submit">회원가입
             </button>
         </div>
 
