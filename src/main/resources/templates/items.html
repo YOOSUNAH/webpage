@@ -6,6 +6,27 @@
           href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="col">
+    <button class="w-100 btn btn-secondary btn-lg"
+            th:onclick="location.href='/users/login'"
+            type="button">로그인 하기
+    </button>
+</div>
+<script>
+    function goDetailPage(articleId) {
+        var loginUser = '[[${session.loginUser}]]'
+        var isLogin = loginUser != null && loginUser != '';
+        console.log("isLogin : ", isLogin)
+
+        if (isLogin) {
+            location.href = '/posts/items/' + articleId;
+        } else {
+            alert('로그인 후 이용해주세요');
+        }
+    }
+</script>
+
+
 <div class="container" style="max-width: 600px">
 
     <div class="py-5 text-center">
@@ -13,7 +34,6 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-primary float-end"
-                    onclick="location.href='addForm.html'"
                     th:onclick="location.href='/posts/write'"
                     type="button">게시물 작성으로
             </button>
@@ -33,12 +53,15 @@
             </thead>
             <tbody>
             <tr th:each="article : ${articles}">
-                <td><a th:href="@{/posts/items/{id}(id=${article.id})}" th:text="${article.id}">
-                    id </a></td>
-                <td th:text="${article.category}">카테고리</td>
-                <td th:text="${article.title}">제목</td>
-                <td th:text="${article.content}">내용</td>
-                <td th:text="${article.writerName}">작성자</td>
+                <td>
+                    <button th:onclick="goDetailPage([[${article.id}]])">
+                        [[${article.id}]]
+                    </button>
+                </td>
+                <td th:text="${article.category}"></td>
+                <td th:text="${article.title}"></td>
+                <td th:text="${article.content}"></td>
+                <td th:text="${article.writerName}"></td>
             </tr>
 
             </tbody>

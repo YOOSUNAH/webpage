@@ -1,5 +1,6 @@
 package webpage.demo.article.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,14 @@ public class ArticleController {
     }
 
     @GetMapping("/items")
-    public String articleForm(Model model) {
+    public String articleForm(Model model, HttpSession session) {
         List<Article> articles = repo.findAll();
         model.addAttribute("articles", articles);
-        return "items";
+        session.setAttribute("loginUser", true);
+        return "items.html";
     }
+
+
 
     @GetMapping("/items/{itemId}")
     public String articleForm(Model model, @PathVariable Long itemId) {
