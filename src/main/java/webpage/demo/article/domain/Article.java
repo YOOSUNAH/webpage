@@ -1,4 +1,4 @@
-package webpage.demo.domain;
+package webpage.demo.article.domain;
 
 import lombok.Getter;
 import lombok.Setter;

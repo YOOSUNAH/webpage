@@ -3,8 +3,8 @@ package webpage.demo.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import webpage.demo.article.domain.Article;
+import webpage.demo.article.domain.ArticleRepository;
 
 class ArticleRepositoryTest {
     ArticleRepository articleRepository = new ArticleRepository();

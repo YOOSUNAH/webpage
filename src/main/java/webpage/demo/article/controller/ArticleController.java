@@ -1,23 +1,22 @@
-package webpage.demo.requestmapping;
+package webpage.demo.article.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.slf4j.Slf4j;
-import webpage.demo.domain.Article;
-import webpage.demo.domain.ArticleRepository;
+import webpage.demo.article.domain.Article;
+import webpage.demo.article.domain.ArticleRepository;
 
 import java.util.List;
 
 @Slf4j
-// @RestController
 @Controller
 @RequestMapping("/posts")
-public class MappingClassController {
+public class ArticleController {
     private final ArticleRepository repo;
 
-    public MappingClassController(ArticleRepository repo) {
+    public ArticleController(ArticleRepository repo) {
         this.repo = repo;
     }
 
