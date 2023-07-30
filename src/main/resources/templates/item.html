@@ -9,6 +9,7 @@
               max-width: 560px;
 }
 
+
     </style>
 
 </head>
@@ -17,16 +18,10 @@
     <div class="py-5 text-center">
         <h2>게시물 상세</h2></div>
 
-
-
     <h2 th:if="${param.status}" th:text="'저장완료'"></h2>
 
 </div>
-<div>
-    <label for="itemId">ID</label>
-    <input type="text" id="itemId" name="itemId" class="form-control"
-           value="1" th:value="${item.id}" readonly>
-</div>
+
 <div>
     <label for="category">카테고리</label>
     <input type="text" id="category" name="category" class="form-control"
@@ -48,18 +43,11 @@
 </div>
 <hr class="my-4">
 <div class="row">
-    <div class="col">
-        <button class="w-100 btn btn-primary btn-lg"
-                onclick="location.href='editForm.html'"
-                th:onclick="|location.href='@{/posts/items/{item}/edit(itemId=${item.id})}'|"
-                type="button">게시물 수정
-        </button>
-    </div>
+
     <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"
-                onclick="location.href='items.html'"
-                th:inclick="|location.href='@{/posts/items}'|"
-                type="button">목록으로
+                th:onclick="location.href='/posts/items'"
+                type="button">게시물 목록으로
         </button>
     </div>
 </div>

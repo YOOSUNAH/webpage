@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form method="post" action="/posts" th:action id="postForm">
+    <form method="post" action="/posts/write" id="postForm">
         <div>게시물 작성하기</div>
         <div>
             <label>
@@ -40,18 +40,23 @@
             </label>
         </div>
         <div>
-            <button
-                    th:onclick="|location.href='@{/posts/item}'|"
-                    type="submit">저장 </button>
+            <button class="w-100 btn btn-secondary btn-lg"
+                    type="submit">저장
+            </button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
-                    onclick="location.href='items.html'"
-                    th:onclick="|location.href='@{/posts/items}'"
-                    type="button">게시물 목록으로</button>
-
-</div>
-</form>
+                    th:onclick="location.href='/posts/items'"
+                    type="button">게시물 목록으로
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    th:onclick="location.href='/'"
+                    type="button">홈으로
+            </button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

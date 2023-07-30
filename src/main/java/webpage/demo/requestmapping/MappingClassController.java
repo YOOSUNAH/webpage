@@ -22,21 +22,17 @@ public class MappingClassController {
     }
 
     @GetMapping("/items")
-    public String items() {
-        return "items";
-    }
-    @GetMapping ()
-    public String article(Model model) {
-        List<Article> article = repo.findAll();
-        model.addAttribute("Article", article);
-        return "items";
-    }
-
-   @GetMapping("/list")
     public String articleForm(Model model) {
         List<Article> articles = repo.findAll();
         model.addAttribute("articles", articles);
-        return "listForm";
+        return "items";
+    }
+
+    @GetMapping("/items/{itemId}")
+    public String articleForm(Model model, @PathVariable Long itemId) {
+        Article article = repo.findById(itemId);
+        model.addAttribute("article", article);
+        return "item";
     }
 
 // ---------------------------------------------------------------//
@@ -50,7 +46,8 @@ public class MappingClassController {
             @RequestParam String title,
             @RequestParam String content,
             @RequestParam String  writerName,
-            Model model) {
+            Model model
+    ) {
 
         Article article = new Article();
         article.setCategory(category);
@@ -60,12 +57,10 @@ public class MappingClassController {
 
         ArticleRepository.save(article);
 
-        model.addAttribute("article", article);
+        model.addAttribute("article",article);
 
-        return "items";
+        return "item";
     }
-
-
 
     public <model> String addArticleV1(
             @RequestParam String category,
