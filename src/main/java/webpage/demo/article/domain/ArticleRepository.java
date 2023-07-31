@@ -12,13 +12,13 @@ public class ArticleRepository {
     private static final Map<Long, Article> store = new HashMap<>();
     private static long sequence = 0L;
 
-    public static Article save(Article article){
+    public Article save(Article article){
         article.setId(++sequence);
         store.put(article.getId(), article);
         return article;
     }
 
-    public static Article findById(Long id){
+    public Article findById(Long id){
         return store.get(id);
     }
     public List<Article> findAll(){
@@ -27,7 +27,6 @@ public class ArticleRepository {
     public void update(Long articleId, Article updateParam){
         Article findArticle = findById(articleId);
         findArticle.setCategory(updateParam.getCategory());
-
     }
 
     public void clearStore(){

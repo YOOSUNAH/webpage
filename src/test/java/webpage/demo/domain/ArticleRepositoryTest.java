@@ -19,7 +19,7 @@ class ArticleRepositoryTest {
         //given
         Article article = new Article(1L, "category1", "title1", "context1", "writer1");
         //when
-        Article savedArticle = ArticleRepository.save(article);
+        Article savedArticle = articleRepository.save(article);
         //then
         Article findArticle = articleRepository.findById(article.getId());
         Assertions.assertThat(findArticle).isEqualTo(savedArticle);

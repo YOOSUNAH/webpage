@@ -1,0 +1,21 @@
+HTTP1.1 POST /users/login # Request Line
+Accept: text/html,application/xhtml+xml,application/xml;
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 30
+Content-Type: application/x-www-form-urlencoded
+Cookie: Pycharm-678ad47b=ce0136b8-d462-4fef-a7e6-41d59aa6a641; Idea-1a2e8309=9ee5a865-ba94-470f-ba3b-3347ebeed337; JSESSIONID=8F3FCF647501423F9FF864EDCDBDDDEA
+Host: localhost:8080
+Origin: http://localhost:8080 Referer: http://localhost:8080/users/login?isValid=false Sec-Ch-Ua: "Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "macOS"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36
+
+username=123123&password=23123

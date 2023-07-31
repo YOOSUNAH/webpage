@@ -15,15 +15,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/posts")
 public class ArticleController {
-    private final ArticleRepository repo;
+    private final ArticleRepository articleRepository;
 
-    public ArticleController(ArticleRepository repo) {
-        this.repo = repo;
+    public ArticleController(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
     }
 
     @GetMapping("/items")
     public String articleForm(Model model, HttpSession session) {
-        List<Article> articles = repo.findAll();
+        List<Article> articles = articleRepository.findAll();
         model.addAttribute("articles", articles);
         session.setAttribute("loginUser", true);
         return "items.html";
@@ -33,7 +33,7 @@ public class ArticleController {
 
     @GetMapping("/items/{itemId}")
     public String articleForm(Model model, @PathVariable Long itemId) {
-        Article article = repo.findById(itemId);
+        Article article = articleRepository.findById(itemId);
         model.addAttribute("article", article);
         return "item";
     }
@@ -43,6 +43,7 @@ public class ArticleController {
     public String write() {
         return "addForm";
     }
+
     @PostMapping("/write")
     public String save(
             @RequestParam String category,
@@ -58,27 +59,14 @@ public class ArticleController {
         article.setContent(content);
         article.setWriterName(writerName);
 
-        ArticleRepository.save(article);
+        articleRepository.save(article);
+        if( article.getTitle() != null){
+
+        }
 
         model.addAttribute("article",article);
 
         return "item";
-    }
-
-    public <model> String addArticleV1(
-            @RequestParam String category,
-            @RequestParam String title,
-            @RequestParam String content,
-            @RequestParam String writerName
-    ) {
-        Article article = new Article();
-        article.setCategory(category);
-        article.setTitle(title);
-        article.setContent(content);
-        article.setWriterName(writerName);
-
-        ArticleRepository.save(article);
-        return "/items";
     }
 }
 
