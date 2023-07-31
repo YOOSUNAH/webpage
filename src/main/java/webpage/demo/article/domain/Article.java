@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter  @Setter
 public class Article {
+
     private Long id;
     private String category;
     private String title;
